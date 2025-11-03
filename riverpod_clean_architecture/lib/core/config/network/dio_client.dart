@@ -18,17 +18,16 @@ class DioClient {
 
     //INTERCEPTORS
     _dio.interceptors.addAll([LoggerInterceptor()]);
-
-    //GENERIC GET METHOD
-    Future<Response> get(
-      String endpoint, {
-      Map<String, dynamic>? queryParams,
-    }) async {
-      try {
-        return await _dio.get(endpoint, queryParameters: queryParams);
-      } on DioException catch (e) {
-        throw Exception(_handleError(e));
-      }
+  }
+  //GENERIC GET METHOD
+  Future<Response> get(
+    String endpoint, {
+    Map<String, dynamic>? queryParams,
+  }) async {
+    try {
+      return await _dio.get(endpoint, queryParameters: queryParams);
+    } on DioException catch (e) {
+      throw Exception(_handleError(e));
     }
   }
 

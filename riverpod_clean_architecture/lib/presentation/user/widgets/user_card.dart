@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_clean_architecture/core/themes/colors/app_colors.dart';
+import 'package:riverpod_clean_architecture/domain/entities/user_entity.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key});
+  final UserEntity userEntity;
+  const UserCard({super.key, required this.userEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +35,67 @@ class UserCard extends StatelessWidget {
                   spacing: 5,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 45,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.myWhite, width: 2),
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/person.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    userEntity.profilePic.isNotEmpty
+                        ? Container(
+                            width: 45,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: AppColors.myBlack3,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: AppColors.myWhite,
+                                width: 2,
+                              ),
+                            ),
+                            // Use ClipOval to ensure the image respects the circle shape
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                imageUrl: userEntity
+                                    .profilePic, 
+                                fit: BoxFit
+                                    .cover, // Ensure the image covers the area
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.myWhite,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ),
+                          )
+                        : Container(
+                            width: 45,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: AppColors.myBlack3,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: AppColors.myWhite,
+                                width: 2,
+                              ),
+                              // Placeholder image (e.g., a default asset or an Icon)
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/images/person.jpg',
+                                ), // Default/Placeholder image
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "John Smith",
+                          '${userEntity.firstName} ${userEntity.lastName}',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
-                          "United States, Mississipi",
+                          "${userEntity.country}, ${userEntity.state}",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -76,10 +116,7 @@ class UserCard extends StatelessWidget {
                     spacing: 5,
                     children: [
                       Icon(Icons.work),
-                      Text(
-                        'Works as a Sales Manger',
-                        style: TextStyle(fontSize: 12),
-                      ),
+                      Text(userEntity.jobTitle, style: TextStyle(fontSize: 12)),
                     ],
                   ),
                   Row(
@@ -87,7 +124,7 @@ class UserCard extends StatelessWidget {
                     children: [
                       Icon(Icons.location_city),
                       Text(
-                        'Works at Dooley, Kozey and Cronin',
+                        userEntity.companyName,
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
@@ -97,7 +134,7 @@ class UserCard extends StatelessWidget {
                     children: [
                       Icon(Icons.phone),
                       Text(
-                        'Phone number: +81 965-431-3024',
+                        'Phone number: ${userEntity.phone}',
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
@@ -107,7 +144,7 @@ class UserCard extends StatelessWidget {
                     children: [
                       Icon(Icons.email),
                       Text(
-                        'Email: emily.johnson@x.dummyjson.com',
+                        'Email: ${userEntity.email}',
                         style: TextStyle(fontSize: 12),
                       ),
                     ],

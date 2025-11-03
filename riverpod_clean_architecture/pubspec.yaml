@@ -13,6 +13,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
   riverpod: ^3.0.3
+  flutter_riverpod: ^3.0.3
   cached_network_image: ^3.4.1
   shimmer: ^3.0.0
   dio: ^5.9.0

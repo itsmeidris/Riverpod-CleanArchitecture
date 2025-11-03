@@ -7,7 +7,7 @@ class LoggerInterceptor extends Interceptor {
     if (kDebugMode) {
       debugPrint("REQUEST: ${options.method} ${options.uri}");
       debugPrint("HEADERS: ${options.headers}");
-      debugPrint("DATA: ${options.data}");
+      //debugPrint("DATA: ${options.data.toString()}");
     }
     super.onRequest(options, handler);
   }
@@ -25,7 +25,7 @@ class LoggerInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    debugPrint("❌ERROR: ${err.requestOptions.uri}");
+    debugPrint("❌ERROR: ${err.requestOptions.uri},${err.message}");
     super.onError(err, handler);
   }
 }

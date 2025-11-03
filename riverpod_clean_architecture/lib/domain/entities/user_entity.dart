@@ -22,4 +22,9 @@ class UserEntity {
     required this.email,
     required this.phone,
   });
+
+  @override
+  String toString() {
+    return 'UserEntity(id: $id, profilePic: $profilePic, firstName: $firstName, lastName: $lastName, country: $country, state: $state, jobTitle: $jobTitle, companyName: $companyName, email: $email, phone: $phone)';
+  }
 }
