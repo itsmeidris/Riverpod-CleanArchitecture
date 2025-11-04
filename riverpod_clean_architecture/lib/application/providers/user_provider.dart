@@ -1,7 +1,7 @@
 // Step 1: provide UserRemoteDataSource
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_clean_architecture/application/notifiers/users_notifier.dart';
+import 'package:riverpod_clean_architecture/application/controllers/users_controller.dart';
 import 'package:riverpod_clean_architecture/application/providers/dio/dio_provider.dart';
 import 'package:riverpod_clean_architecture/data/datasources/remote/user_remote_data_source.dart';
 import 'package:riverpod_clean_architecture/data/repositories/user_repository_impl.dart';
@@ -28,7 +28,7 @@ final getUsersUseCaseProvider = Provider<GetUserDataUseCase>((ref) {
 
 // Step 4: provider for notifier
 final usersNotifiersProvider =
-    StateNotifierProvider<UsersNotifier, AsyncValue<List<UserEntity>>>((ref) {
+    StateNotifierProvider<UsersController, AsyncValue<List<UserEntity>>>((ref) {
       final useCase = ref.watch(getUsersUseCaseProvider);
-      return UsersNotifier(useCase);
+      return UsersController(useCase);
     });

@@ -1,2 +1,2 @@
 const String usersMain = '/users';
-const String userDetail = '/user-detail';
+const String userDetails = '/user-details';

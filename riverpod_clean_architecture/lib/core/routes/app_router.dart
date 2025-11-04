@@ -15,8 +15,8 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: userDetail,
-        name: 'userDetail',
+        path: userDetails,
+        name: 'userDetails',
         builder: (context, state) {
           return UserDetail();
         },

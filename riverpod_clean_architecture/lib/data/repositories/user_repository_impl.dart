@@ -17,3 +17,5 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 }
+
+//Convert to Entity class so the app can use it

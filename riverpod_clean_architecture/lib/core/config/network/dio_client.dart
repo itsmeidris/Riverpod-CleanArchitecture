@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:riverpod_clean_architecture/core/config/errors/dio_exceptions.dart';
 import 'package:riverpod_clean_architecture/core/config/network/interceptors/logger_interceptor.dart';
 import 'package:riverpod_clean_architecture/core/constants/api_endpoints.dart';
 
@@ -27,29 +28,7 @@ class DioClient {
     try {
       return await _dio.get(endpoint, queryParameters: queryParams);
     } on DioException catch (e) {
-      throw Exception(_handleError(e));
-    }
-  }
-
-  //HANDLING CUSTOM ERRORS
-  String _handleError(DioException e) {
-    switch (e.type) {
-      case DioExceptionType.connectionTimeout:
-        return "Connection timeout";
-      case DioExceptionType.receiveTimeout:
-        return "Recieve timeout";
-      case DioExceptionType.sendTimeout:
-        return "Sending timeout";
-      case DioExceptionType.badResponse:
-        return "Server error: ${e.response?.statusCode}";
-      case DioExceptionType.connectionError:
-        return "Connection error";
-      case DioExceptionType.badCertificate:
-        return "Bad certification";
-      case DioExceptionType.cancel:
-        return "Request cancelled";
-      default:
-        return "Unexpected error: ${e.message}";
+      throw Exception(DioExceptions().handleError(e));
     }
   }
 }
