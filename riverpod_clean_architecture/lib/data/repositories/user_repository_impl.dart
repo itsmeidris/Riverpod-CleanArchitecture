@@ -18,4 +18,6 @@ class UserRepositoryImpl implements UserRepository {
   }
 }
 
+//Decides whether to fetch from remote or local data source
 //Convert to Entity class so the app can use it
+//Handles errors and converts them to domain-friendly formats

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_clean_architecture/core/themes/colors/app_colors.dart';
+import 'package:riverpod_clean_architecture/application/core/themes/colors/app_colors.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

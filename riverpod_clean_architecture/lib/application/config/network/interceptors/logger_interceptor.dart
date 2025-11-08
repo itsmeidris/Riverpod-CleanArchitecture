@@ -7,7 +7,6 @@ class LoggerInterceptor extends Interceptor {
     if (kDebugMode) {
       debugPrint("REQUEST: ${options.method} ${options.uri}");
       debugPrint("HEADERS: ${options.headers}");
-      //debugPrint("DATA: ${options.data.toString()}");
     }
     super.onRequest(options, handler);
   }

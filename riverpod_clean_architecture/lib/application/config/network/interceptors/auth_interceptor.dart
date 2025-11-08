@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:riverpod_clean_architecture/core/storage/secure/secure_storage.dart';
+import 'package:riverpod_clean_architecture/application/core/storage/secure/secure_storage.dart';
 
 class AuthInterceptor extends Interceptor {
-  final SecureStorage _secureStorage;
+  final SecureStorage _secureStorage = SecureStorage();
 
-  AuthInterceptor(this._secureStorage);
+  AuthInterceptor();
 
   @override
   void onRequest(
